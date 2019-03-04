@@ -72,11 +72,12 @@ class Visma_Richsnippets_Block_Jsonld extends Mage_Core_Block_Template
                             )
                         );
                     }
+                    // let's put review data into $json array
+                    $json['reviewCount'] = $reviewSummary->getTotalReviews($_product->getId(), true);
+                    $json['ratingValue'] = number_format(floor(($ratingData['rating_summary'] / 20) * 2) / 2, 1); // average rating (1-5 range)
+                    $json['review'] = $reviewData;
                 }
-                // let's put review data into $json array
-                $json['reviewCount'] = $reviewSummary->getTotalReviews($_product->getId(), true);
-                $json['ratingValue'] = number_format(floor(($ratingData['rating_summary'] / 20) * 2) / 2, 1); // average rating (1-5 range)
-                $json['review'] = $reviewData;
+                
             }
             //use Desc if Shortdesc not work
             if ($_product->getShortDescription()) {
